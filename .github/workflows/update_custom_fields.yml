@@ -60,7 +60,7 @@ jobs:
       - name: Trigger Google Apps Script
         run: |
           # Replace `YOUR_GOOGLE_APPS_SCRIPT_ENDPOINT` with the actual endpoint of your Google Apps Script
-          curl -X POST "YOUR_GOOGLE_APPS_SCRIPT_ENDPOINT"
+          curl -X POST "https://script.google.com/macros/s/AKfycbwY5MQDrX73W3CxJGKJ9tqZ51qhtDF8IVipkoRdPBpLYspLsIgc5V-HjgkzOrb6rzeL/exec"
 
       - name: Set Custom Fields
         run: |
