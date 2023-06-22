@@ -19,7 +19,9 @@ jobs:
           REPORTED_ON=$(jq --raw-output .issue.created_at $GITHUB_EVENT_PATH)
           LOGGED_BY=$(jq --raw-output .issue.user.login $GITHUB_EVENT_PATH)
           URL=$(jq --raw-output .issue.html_url $GITHUB_EVENT_PATH)
-
+          SEVERITY=$(jq --raw-output .issue.html_url $GITHUB_EVENT_PATH)
+          EPIC_FEATURES=$(jq --raw-output .issue.html_url $GITHUB_EVENT_PATH)
+          
           # Update custom fields using GitHub API
           curl -X PATCH \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -29,6 +31,8 @@ jobs:
                 "Reported On": "'"$REPORTED_ON"'",
                 "Logged By": "'"$LOGGED_BY"'",
                 "URL": "'"$URL"'"
+                "Severity": "'"$SEVERITY"'"
+                "Epic-Features": "'"$EPIC_FEATURES"'"
               }
             }' \
             "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/issues/$ISSUE_NUMBER"
