@@ -22,6 +22,14 @@ jobs:
           SEVERITY=$(jq --raw-output .issue.html_url $GITHUB_EVENT_PATH)
           EPIC_FEATURES=$(jq --raw-output .issue.html_url $GITHUB_EVENT_PATH)
           
+          echo "Hello"
+          echo "Issue Number: $ISSUE_NUMBER"
+          echo "Repository Owner: $REPO_OWNER"
+          echo "Repository Name: $REPO_NAME"
+          echo "Reported On: $REPORTED_ON"
+          echo "Logged By: $LOGGED_BY"
+          echo "URL: $URL"
+          
           # Update custom fields using GitHub API
           curl -X PATCH \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
