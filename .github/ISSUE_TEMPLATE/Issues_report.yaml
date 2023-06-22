@@ -1,11 +1,11 @@
 name: Bug Report
 description: File a bug report
 title: "Title of your bug"
-labels: Title, URL, Logged By, Reported On, Epic-Features, Severity, Envrionment
+labels: Title, URL, Logged By, Reported On, Epic-Features, Severity, Environment
 assignees:
   - PranijJoshi
 body:
-  - type: textarea
+  - type: input
     id: loggedBy
     attributes:
       label: Logged By
@@ -13,15 +13,15 @@ body:
       placeholder: ex. Pranij or pranij@gmail.com
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: date
     attributes:
-      label: Reported on
+      label: Reported On
       description: Select the date the bug was encountered
       placeholder: MM/DD/YYYY
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: epicFeatures
     attributes:
       label: Epic Features
@@ -29,47 +29,46 @@ body:
       placeholder: Please list the features where the problem occurred.
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: urls
     attributes:
       label: URL
       description: Please include the URL of the bug
-      placeholder: URL    
-  - type: textarea
-    id: Description
-    attributes: 
+      placeholder: URL
+  - type: input
+    id: description
+    attributes:
       label: Description
       description: Brief description of the reported bug
-      placeholder: description
-  - type: textarea
+      placeholder: Description
+  - type: input
     id: severity
     attributes:
       label: Severity
-  - type: textarea
+  - type: input
     id: environment
     attributes:
       label: Environment
-      description: environment
-      placeholder: environment
-  - type: textarea
+      description: Environment
+      placeholder: Environment
+  - type: input
     id: images
     attributes:
       label: Attach Images for references
       description: Please attach any relevant images
-  - type: textarea 
+  - type: input
     id: reproduce
     attributes:
       label: How to Reproduce
       description: How to encounter the bug
       placeholder: How to reproduce the bug
-    validations: 
+    validations:
       required: true
-  - type: textarea
+  - type: input
     id: behavior
     attributes:
-      label: Expected Behavior 
+      label: Expected Behavior
       description: What was the functionality
       placeholder: How should it have functioned??
     validations:
       required: true
-    
