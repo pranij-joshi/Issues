@@ -1,0 +1,34 @@
+name: Update Custom Fields on New Issue
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  updateCustomFields:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Custom Fields
+        run: |
+          # Extract issue information
+          ISSUE_NUMBER=$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)
+          REPO_OWNER=$(jq --raw-output .repository.owner.login $GITHUB_EVENT_PATH)
+          REPO_NAME=$(jq --raw-output .repository.name $GITHUB_EVENT_PATH)
+          REPORTED_ON=$(jq --raw-output .issue.created_at $GITHUB_EVENT_PATH)
+          LOGGED_BY=$(jq --raw-output .issue.user.login $GITHUB_EVENT_PATH)
+          URL=$(jq --raw-output .issue.html_url $GITHUB_EVENT_PATH)
+
+          # Update custom fields using GitHub API
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{
+              "fields": {
+                "Reported On": "'"$REPORTED_ON"'",
+                "Logged By": "'"$LOGGED_BY"'",
+                "URL": "'"$URL"'"
+              }
+            }' \
+            "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/issues/$ISSUE_NUMBER"
