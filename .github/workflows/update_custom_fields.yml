@@ -19,7 +19,7 @@ jobs:
 
       - name: Trigger Google Apps Script
         run: |
-          curl -X GET "https://script.google.com/macros/s/AKfycbyaiklWYkxBHtDUtpfAipM25QGd65tdChcl86B6k3-asgmWsaxqotTlFxeNopc2Hd6G/exec"
+          curl -X GET -L "https://script.google.com/macros/s/AKfycbyaiklWYkxBHtDUtpfAipM25QGd65tdChcl86B6k3-asgmWsaxqotTlFxeNopc2Hd6G/exec"
 
       - name: Set Custom Fields
         run: |
