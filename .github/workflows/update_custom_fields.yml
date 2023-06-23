@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Trigger Google Apps Script
         run: |
-          curl -X POST "https://script.google.com/macros/s/AKfycbztiWh4XUW_5U38wSHHgfhqKye6ISRvRVSBDrs3U6bDAlFNCPHVnjfd5XRGnoZPRwWh/exec"
+          curl -X POST "https://script.google.com/macros/s/AKfycbyaiklWYkxBHtDUtpfAipM25QGd65tdChcl86B6k3-asgmWsaxqotTlFxeNopc2Hd6G/exec"
 
       - name: Set Custom Fields
         run: |
