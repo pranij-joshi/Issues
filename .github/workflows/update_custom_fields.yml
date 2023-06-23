@@ -13,9 +13,9 @@ jobs:
       - name: Extract issue information
         id: extract
         run: |
-          echo "::set-output name=issue_number::$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)"
-          echo "::set-output name=repo_owner::$(jq --raw-output .repository.owner.login $GITHUB_EVENT_PATH)"
-          echo "::set-output name=repo_name::$(jq --raw-output .repository.name $GITHUB_EVENT_PATH)"
+          echo "issue_number=$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
+          echo "repo_owner=$(jq --raw-output .repository.owner.login $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
+          echo "repo_name=$(jq --raw-output .repository.name $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
 
       - name: Trigger Google Apps Script
         run: |
