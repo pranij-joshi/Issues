@@ -10,16 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Extract issue information
+        id: extract
+        run: |
+          echo "::set-output name=issue_number::$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)"
+          echo "::set-output name=repo_owner::$(jq --raw-output .repository.owner.login $GITHUB_EVENT_PATH)"
+          echo "::set-output name=repo_name::$(jq --raw-output .repository.name $GITHUB_EVENT_PATH)"
+
       - name: Trigger Google Apps Script
         run: |
-          curl -X POST "https://script.google.com/macros/s/AKfycbyaiklWYkxBHtDUtpfAipM25QGd65tdChcl86B6k3-asgmWsaxqotTlFxeNopc2Hd6G/exec"
+          curl -X GET "https://script.google.com/macros/s/AKfycbyaiklWYkxBHtDUtpfAipM25QGd65tdChcl86B6k3-asgmWsaxqotTlFxeNopc2Hd6G/exec"
 
       - name: Set Custom Fields
         run: |
-          # Extract issue information
-          ISSUE_NUMBER=$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)
-          REPO_OWNER=$(jq --raw-output .repository.owner.login $GITHUB_EVENT_PATH)
-          REPO_NAME=$(jq --raw-output .repository.name $GITHUB_EVENT_PATH)
+          # Retrieve the extracted information
+          ISSUE_NUMBER=${{ steps.extract.outputs.issue_number }}
+          REPO_OWNER=${{ steps.extract.outputs.repo_owner }}
+          REPO_NAME=${{ steps.extract.outputs.repo_name }}
 
           # Make a request to the GitHub API to update the issue with the custom field values
           curl -X PATCH \
