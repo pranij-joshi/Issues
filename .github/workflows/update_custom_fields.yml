@@ -1,50 +1,3 @@
-# name: Update Custom Fields on New Issue
-
-# on:
-#   issues:
-#     types:
-#       - opened
-
-# jobs:
-#   updateCustomFields:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Set Custom Fields
-#         run: |
-#           # Extract issue information
-#           ISSUE_NUMBER=$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)
-#           REPO_OWNER=$(jq --raw-output .repository.owner.login $GITHUB_EVENT_PATH)
-#           REPO_NAME=$(jq --raw-output .repository.name $GITHUB_EVENT_PATH)
-#           REPORTED_ON=$(jq --raw-output .issue.reportedOn $GITHUB_EVENT_PATH)
-#           LOGGED_BY=$(jq --raw-output .issue.loggedBy $GITHUB_EVENT_PATH)
-#           URL=$(jq --raw-output .issue.url $GITHUB_EVENT_PATH)
-#           SEVERITY=$(jq --raw-output .issue.severity $GITHUB_EVENT_PATH)
-#           EPIC_FEATURES=$(jq --raw-output .issue.epicFeatures $GITHUB_EVENT_PATH)
-          
-#           echo "Hello"
-#           echo "Issue Number: $ISSUE_NUMBER"
-#           echo "Repository Owner: $REPO_OWNER"
-#           echo "Repository Name: $REPO_NAME"
-#           echo "Reported On: $REPORTED_ON"
-#           echo "Logged By: $LOGGED_BY"
-#           echo "URL: $URL"
-          
-#           # Update custom fields using GitHub API
-#           curl -X PATCH \
-#             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-#             -H "Accept: application/vnd.github.v3+json" \
-#             -d '{
-#               "fields": {
-#                 "Reported On": "'"$REPORTED_ON"'",
-#                 "Logged By": "'"$LOGGED_BY"'",
-#                 "URL": "'"$URL"'"
-#                 "Severity": "'"$SEVERITY"'"
-#                 "Epic-Features": "'"$EPIC_FEATURES"'"
-#               }
-#             }' \
-#             "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/issues/$ISSUE_NUMBER"
-
 name: Update Custom Fields on New Issue
 
 on:
@@ -59,7 +12,6 @@ jobs:
     steps:
       - name: Trigger Google Apps Script
         run: |
-          # Replace `YOUR_GOOGLE_APPS_SCRIPT_ENDPOINT` with the actual endpoint of your Google Apps Script
           curl -X POST "https://script.google.com/macros/s/AKfycbztiWh4XUW_5U38wSHHgfhqKye6ISRvRVSBDrs3U6bDAlFNCPHVnjfd5XRGnoZPRwWh/exec"
 
       - name: Set Custom Fields
